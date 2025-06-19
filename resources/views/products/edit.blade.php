@@ -75,6 +75,16 @@
                         @enderror
                     </div>
                 </div>
+
+                <div class="mb-3 row">
+                    <label for="image_blob" class="col-md-4 col-form-label text-md-end text-start">Image (BLOB)</label>
+                    <div class="col-md-6">
+                        <input type="file" class="form-control @error('image_blob') is-invalid @enderror" id="image_blob" name="image_blob">
+                        @error('image_blob')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
                 
                 <div class="mb-3 row">
                     <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update">
