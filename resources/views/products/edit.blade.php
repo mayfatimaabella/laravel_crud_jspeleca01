@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('products.update', $product->id) }}" method="post">
+                <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data">
                     @csrf   
                     @method("PUT")
 

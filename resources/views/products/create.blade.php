@@ -74,7 +74,7 @@
                         <div class="col-md-6">
                             <input type="file" class="form-control @error('image_blob') is-invalid @enderror" id="image_blob" name="image_blob">
                             @error('image_blob')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
