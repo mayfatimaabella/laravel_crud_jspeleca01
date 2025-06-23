@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -36,7 +37,7 @@ class ProductController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image')->store('products', 'public');
+            $path = $request->file('image')->store('products', 'public');
             $data['image_path'] = $path;
         }
 
@@ -70,12 +71,12 @@ class ProductController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-           if($product->image_path){
+            if ($product->image_path) {
                 Storage::disk('public')->delete($product->image_path);
-           }
+            }
 
-           $path = $request->file('image')->store('products','public');
-           $data['image_path'] = $path;
+            $path = $request->file('image')->store('products', 'public');
+            $data['image_path'] = $path;
         }
 
         $product->update($data);
@@ -89,7 +90,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
-        if ($product->image_path){
+        if ($product->image_path) {
             Storage::disk('public')->delete($product->image_path);
         }
 
