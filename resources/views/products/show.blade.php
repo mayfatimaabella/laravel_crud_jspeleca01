@@ -51,13 +51,13 @@
                 <div class="row">
                     <label class="col-md-4 col-form-label text-md-end"><strong>Image:</strong></label>
                     <div class="col-md-6" style="line-height: 35px;">
-                        @if($product->image_blob)
-                        <img src="data:image/jpeg;base64,{{ base64_encode($product->image_blob) }}" width="150">
-                        @else
-                        No Image
-                        @endif
-                    </div>
-                </div>
+        @if($product->image_path)
+            <img src="{{ asset('storage/'.$product->image_path) }}" class="img-thumbnail" style="max-height: 200px;">
+        @else
+            No image available
+        @endif
+    </div>
+</div>
             </div>
         </div>
     </div> 

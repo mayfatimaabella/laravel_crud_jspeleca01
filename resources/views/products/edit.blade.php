@@ -77,14 +77,34 @@
                 </div>
 
                 <div class="mb-3 row">
-                    <label for="image_blob" class="col-md-4 col-form-label text-md-end text-start">Image (BLOB)</label>
+                    <label for="image" class="col-md-4 col-form-label text-md-end text-start">Product Image</label>
                     <div class="col-md-6">
-                        <input type="file" class="form-control @error('image_blob') is-invalid @enderror" id="image_blob" name="image_blob">
-                        @error('image_blob')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
+                        @if($product->image_path)
+                        <div class="mb-2">
+                            <strong>Current Image:</strong><br>
+                <img src="{{ asset('storage/'.$product->image_path) }}" 
+                     alt="Current Product Image" 
+                     class="img-thumbnail mt-2" 
+                     style="max-height: 150px;">
+            </div>
+        @endif
+        
+        <input type="file" 
+               class="form-control @error('image') is-invalid @enderror" 
+               id="image" 
+               name="image">
+        
+        @error('image')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+        
+        <small class="text-muted">
+            @if($product->image_path)
+                Leave empty to keep current image.
+            @endif
+        </small>
+    </div>
+</div>
                 
                 <div class="mb-3 row">
                     <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update">
