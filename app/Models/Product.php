@@ -17,7 +17,6 @@ class Product extends Model
         'price',
         'description',
         'image_path'
-<<<<<<< HEAD
     ];
     
     /**
@@ -39,7 +38,4 @@ class Product extends Model
     {
         return !empty($this->image_path) && Storage::disk('public')->exists($this->image_path);
     }
-=======
- ];
->>>>>>> 5834926ac5a32b91cfd1b3662a15453859262678
 }
