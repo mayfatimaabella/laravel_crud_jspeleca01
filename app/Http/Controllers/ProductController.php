@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -37,8 +38,12 @@ class ProductController extends Controller
 
         if ($request->hasFile('image_blob')) {
             $file = $request->file('image_blob');
-            $data['image_blob'] = file_get_contents($file->getRealPath());
+            $path = $file->store('products', 'public'); // stores in storage/app/public/products
+            $data['image_path'] = $path; // Save path in DB
         }
+
+        // Remove image_blob from $data if it exists
+        unset($data['image_blob']);
 
         Product::create($data);
 
@@ -70,9 +75,17 @@ class ProductController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image_blob')) {
+            // Delete old image if it exists
+            if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
+                Storage::disk('public')->delete($product->image_path);
+            }
+            
             $file = $request->file('image_blob');
-            $data['image_blob'] = file_get_contents($file->getRealPath());
+            $path = $file->store('products', 'public');
+            $data['image_path'] = $path;
         }
+
+        unset($data['image_blob']);
 
         $product->update($data);
 
@@ -85,6 +98,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
+        // Delete associated image file
+        if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
+            Storage::disk('public')->delete($product->image_path);
+        }
+        
         $product->delete();
         return redirect()->route('products.index')
             ->withSuccess('Product is deleted successfully.');

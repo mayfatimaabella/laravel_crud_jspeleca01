@@ -6,7 +6,12 @@
         <div class="alert alert-success" role="alert">{{ $value }}</div>
             @endsession
             <div class="card">
-                <div class="card-header">Product List</div>
+                <div class="card-header">
+                    <div class="float-start">Product List</div>
+                    <div class="float-end">
+                        <span class="text-muted">Welcome, {{ Auth::user()->name }}!</span>
+                    </div>
+                </div>
                 <div class="card-body">
                     <a href="{{ route('products.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add New Product</a>
                     <table class="table table-striped table-bordered">

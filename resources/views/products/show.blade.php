@@ -51,10 +51,10 @@
                 <div class="row">
                     <label class="col-md-4 col-form-label text-md-end"><strong>Image:</strong></label>
                     <div class="col-md-6" style="line-height: 35px;">
-                        @if($product->image_blob)
-                        <img src="data:image/jpeg;base64,{{ base64_encode($product->image_blob) }}" width="150">
+                        @if($product->hasImage())
+                            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" style="max-width:200px; height:auto;" class="img-thumbnail">
                         @else
-                        No Image
+                            <span class="text-muted">No Image</span>
                         @endif
                     </div>
                 </div>
@@ -62,4 +62,4 @@
         </div>
     </div> 
 </div> 
-@endsection 
+@endsection

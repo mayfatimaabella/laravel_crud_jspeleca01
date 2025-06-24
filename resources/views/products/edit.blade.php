@@ -77,12 +77,19 @@
                 </div>
 
                 <div class="mb-3 row">
-                    <label for="image_blob" class="col-md-4 col-form-label text-md-end text-start">Image (BLOB)</label>
+                    <label for="image_blob" class="col-md-4 col-form-label text-md-end text-start">Image</label>
                     <div class="col-md-6">
                         <input type="file" class="form-control @error('image_blob') is-invalid @enderror" id="image_blob" name="image_blob">
                         @error('image_blob')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
+                        
+                        @if($product->hasImage())
+                            <div class="mt-2">
+                                <small class="text-muted">Current image:</small><br>
+                                <img src="{{ $product->image_url }}" alt="{{ $product->name }}" style="max-width:200px; height:auto;" class="img-thumbnail">
+                            </div>
+                        @endif
                     </div>
                 </div>
                 
