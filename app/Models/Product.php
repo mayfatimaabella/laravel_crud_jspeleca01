@@ -16,7 +16,7 @@ class Product extends Model
         'quantity',
         'price',
         'description',
-        'image_path'
+        'image'
     ];
     
     /**
