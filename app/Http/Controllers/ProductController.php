@@ -36,14 +36,13 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-        if ($request->hasFile('image_blob')) {
-            $file = $request->file('image_blob');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
             $path = $file->store('products', 'public');
             $data['image_path'] = $path;
         }
-
-        // Remove image_blob from $data if it exists
-        unset($data['image_blob']);
+ 
+        unset($data['image']);
 
         Product::create($data);
 
@@ -74,18 +73,18 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-        if ($request->hasFile('image_blob')) {
+        if ($request->hasFile('image')) {
             // Delete old image if it exists
             if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
                 Storage::disk('public')->delete($product->image_path);
             }
             
-            $file = $request->file('image_blob');
+            $file = $request->file('image');
             $path = $file->store('products', 'public');
             $data['image_path'] = $path;
         }
 
-        unset($data['image_blob']);
+        unset($data['image']);
 
         $product->update($data);
 

@@ -49,7 +49,7 @@
                 <div class="mb-3 row">
                     <label for="quantity" class="col-md-4 col-form-label text-md-end text-start">Quantity</label>
                 <div class="col-md-6">
-                    <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity"value="{{ $product->quantity }}">
+                    <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{ $product->quantity }}">
                         @error('quantity')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -77,51 +77,34 @@
                 </div>
 
                 <div class="mb-3 row">
-
-                    <label for="image_blob" class="col-md-4 col-form-label text-md-end text-start">Image</label>
-                    <div class="col-md-6">
-                        <input type="file" class="form-control @error('image_blob') is-invalid @enderror" id="image_blob" name="image_blob">
-                        @error('image_blob')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                        
-                        @if($product->hasImage())
-                            <div class="mt-2">
-                                <small class="text-muted">Current image:</small><br>
-                                <img src="{{ $product->image_url }}" alt="{{ $product->name }}" style="max-width:200px; height:auto;" class="img-thumbnail">
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
                     <label for="image" class="col-md-4 col-form-label text-md-end text-start">Product Image</label>
                     <div class="col-md-6">
-                        @if($product->image_path)
-                        <div class="mb-2">
-                            <strong>Current Image:</strong><br>
-                <img src="{{ asset('storage/'.$product->image_path) }}" 
-                     alt="Current Product Image" 
-                     class="img-thumbnail mt-2" 
-                     style="max-height: 150px;">
-            </div>
-        @endif
-        
-        <input type="file" 
-               class="form-control @error('image') is-invalid @enderror" 
-               id="image" 
-               name="image">
-        
-        @error('image')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-        
-        <small class="text-muted">
-            @if($product->image_path)
-                Leave empty to keep current image.
-            @endif
-        </small>
-    </div>
-</div>
+                        @if($product->hasImage())
+                            <div class="mb-2">
+                                <strong>Current Image:</strong><br>
+                                <img src="{{ $product->image_url }}" 
+                                     alt="{{ $product->name }}" 
+                                     class="img-thumbnail mt-2" 
+                                     style="max-height: 150px;">
+                            </div>
+                        @endif
+                        
+                        <input type="file" 
+                               class="form-control @error('image') is-invalid @enderror" 
+                               id="image" 
+                               name="image">
+                        
+                        @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        
+                        <small class="text-muted">
+                            @if($product->hasImage())
+                                Leave empty to keep current image.
+                            @endif
+                        </small>
+                    </div>
+                </div>
 
                 <div class="mb-3 row">
                     <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update">
@@ -132,4 +115,3 @@
 </div> 
 </div>
 @endsection
-
