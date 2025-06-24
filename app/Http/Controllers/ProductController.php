@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -36,10 +37,16 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
+<<<<<<< HEAD
         if ($request->hasFile('image_blob')) {
             $file = $request->file('image_blob');
             $path = $file->store('products', 'public'); // stores in storage/app/public/products
             $data['image_path'] = $path; // Save path in DB
+=======
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+            $data['image_path'] = $path;
+>>>>>>> 5834926ac5a32b91cfd1b3662a15453859262678
         }
 
         // Remove image_blob from $data if it exists
@@ -74,6 +81,7 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
+<<<<<<< HEAD
         if ($request->hasFile('image_blob')) {
             // Delete old image if it exists
             if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
@@ -82,6 +90,14 @@ class ProductController extends Controller
             
             $file = $request->file('image_blob');
             $path = $file->store('products', 'public');
+=======
+        if ($request->hasFile('image')) {
+            if ($product->image_path) {
+                Storage::disk('public')->delete($product->image_path);
+            }
+
+            $path = $request->file('image')->store('products', 'public');
+>>>>>>> 5834926ac5a32b91cfd1b3662a15453859262678
             $data['image_path'] = $path;
         }
 
@@ -98,12 +114,20 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
+<<<<<<< HEAD
         // Delete associated image file
         if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
             Storage::disk('public')->delete($product->image_path);
         }
         
+=======
+        if ($product->image_path) {
+            Storage::disk('public')->delete($product->image_path);
+        }
+
+>>>>>>> 5834926ac5a32b91cfd1b3662a15453859262678
         $product->delete();
+        
         return redirect()->route('products.index')
             ->withSuccess('Product is deleted successfully.');
     }

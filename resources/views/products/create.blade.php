@@ -69,6 +69,7 @@
                             </div>
                         </div>
                     
+<<<<<<< HEAD
                     <div class="mb-3 row">
                         <label for="image_blob" class="col-md-4 col-form-label text-md-end text-start">Image</label>
                         <div class="col-md-6">
@@ -78,6 +79,20 @@
                             @enderror
                         </div>
                     </div>
+=======
+                        <div class="mb-3 row">
+    <label for="image" class="col-md-4 col-form-label text-md-end text-start">Product Image</label>
+    <div class="col-md-6">
+        <input type="file" 
+               class="form-control @error('image') is-invalid @enderror" 
+               id="image" 
+               name="image">
+        @error('image')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+</div>
+>>>>>>> 5834926ac5a32b91cfd1b3662a15453859262678
                         
                         <div class="mb-3 row">
                             <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add Product">
