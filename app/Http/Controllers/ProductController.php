@@ -38,8 +38,8 @@ class ProductController extends Controller
 
         if ($request->hasFile('image_blob')) {
             $file = $request->file('image_blob');
-            $path = $file->store('products', 'public'); // stores in storage/app/public/products
-            $data['image_path'] = $path; // Save path in DB
+            $path = $file->store('products', 'public');
+            $data['image_path'] = $path;
         }
 
         // Remove image_blob from $data if it exists

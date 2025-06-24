@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('products.store') }}"method="post" enctype="multipart/form-data">
+                <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3 row">
@@ -23,7 +23,7 @@
                         <div class="col-md-6">
                             <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ old('code') }}">
                             @error('code')
-                            <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -32,7 +32,6 @@
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
-                            
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -65,41 +64,27 @@
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            @enderror
                         </div>
-                    
-<<<<<<< HEAD
+                    </div>
+
                     <div class="mb-3 row">
-                        <label for="image_blob" class="col-md-4 col-form-label text-md-end text-start">Image</label>
+                        <label for="image" class="col-md-4 col-form-label text-md-end text-start">Product Image</label>
                         <div class="col-md-6">
-                            <input type="file" class="form-control @error('image_blob') is-invalid @enderror" id="image_blob" name="image_blob">
-                            @error('image_blob')
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                            @error('image')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-=======
-                        <div class="mb-3 row">
-    <label for="image" class="col-md-4 col-form-label text-md-end text-start">Product Image</label>
-    <div class="col-md-6">
-        <input type="file" 
-               class="form-control @error('image') is-invalid @enderror" 
-               id="image" 
-               name="image">
-        @error('image')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
+
+                    <div class="mb-3 row">
+                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add Product">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
->>>>>>> 5834926ac5a32b91cfd1b3662a15453859262678
-                        
-                        <div class="mb-3 row">
-                            <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add Product">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div> 
-    </div>
-    @endsection
+
+@endsection
